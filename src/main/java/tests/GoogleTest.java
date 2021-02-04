@@ -23,7 +23,7 @@ public class GoogleTest {
 		/* for internet explorer driver connection */
 //		WebDriver driver = new InternetExplorerDriver();
 		
-		// set the size of browser tab
+		/* set the size of browser tab */
 		driver.manage().window().setSize(new Dimension(1200, 768));
 		
 //		driver.manage().window().maximize();
@@ -32,7 +32,7 @@ public class GoogleTest {
 		
 		Assert.assertEquals("Google", driver.getTitle());
 		
-		// close all browser tabs and kill the instance of the driver..
+		/* close all browser tabs and kill the instance of the driver. */
 		driver.quit();
 	}
 
