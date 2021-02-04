@@ -12,6 +12,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * 
+ * @author paulojunior
+ * 
+ * Test class that interact with basic element of a web formulary.
+ *
+ */
 public class TrainingCampTest {
 	
 	private WebDriver driver;
