@@ -13,7 +13,7 @@ public class GoogleTest {
 	@Test
 	public void testConnection() {
 		/* for chrome driver connection */
-		System.setProperty("webdriver.chrome.driver", "/home/paulojunior/Documentos/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		
 		/* for firefox driver connection */
