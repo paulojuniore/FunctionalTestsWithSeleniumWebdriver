@@ -31,6 +31,7 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("Writing test");
 		
 		Assert.assertEquals("Writing test", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
+		driver.quit();
 	}
 	
 	@Test
@@ -38,6 +39,7 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("This is a test for a textArea field.");
 		
 		Assert.assertEquals("This is a test for a textArea field.", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+		driver.quit();
 	}
 	
 	@Test
@@ -45,6 +47,7 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:sexo:0")).click();
 		
 		Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
+		driver.quit();
 	}
 	
 	@Test
@@ -52,6 +55,7 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
 		
 		Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected());
+		driver.quit();
 	}
 	
 	@Test
@@ -63,6 +67,7 @@ public class TrainingCampTest {
 		combo.selectByVisibleText("Doutorado");
 		
 		Assert.assertEquals("Doutorado", combo.getFirstSelectedOption().getText());
+		driver.quit();
 	}
 	
 	@Test
@@ -85,6 +90,50 @@ public class TrainingCampTest {
 		
 		// checks if the "Especializacao" option is in combo options.
 		Assert.assertTrue(found);
+		driver.quit();
+	}
+	
+	@Test
+	public void multipleChoiceComboTest() {
+		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		Select combo = new Select(element);
+		combo.selectByVisibleText("Natacao");
+		combo.selectByVisibleText("Corrida");
+		combo.selectByVisibleText("Karate");
+		
+		List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+		Assert.assertEquals(3, allSelectedOptions.size());
+		
+		combo.deselectByVisibleText("Natacao");
+		allSelectedOptions = combo.getAllSelectedOptions();
+		Assert.assertEquals(2, allSelectedOptions.size());
+		driver.quit();
+	}
+	
+	@Test
+	public void buttonClickTest() {
+		WebElement button = driver.findElement(By.id("buttonSimple"));
+		button.click();
+		
+		Assert.assertEquals("Obrigado!", button.getAttribute("value"));
+		driver.quit();
+	}
+	
+	@Test
+	public void linkTest() {
+		driver.findElement(By.linkText("Voltar")).click();
+		
+		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+	}
+	
+	@Test
+	public void searchForTextTest() {
+//		System.out.println(driver.findElement(By.tagName("body")).getText());
+		String result = driver.findElement(By.tagName("h3")).getText();
+		Assert.assertEquals("Campo de Treinamento", result);
+		
+		result = driver.findElement(By.className("facilAchar")).getText();
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", result);
 	}
 	
 }
