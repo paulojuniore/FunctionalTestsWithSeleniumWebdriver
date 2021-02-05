@@ -2,6 +2,7 @@ package training_camp;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -30,6 +31,11 @@ public class AlertElementTest {
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 	}
 	
+	@After
+	public void finalize() {
+		driver.quit();
+	}
+	
 	@Test
 	public void alertTest() {
 		driver.findElement(By.id("alert")).click();
@@ -39,8 +45,6 @@ public class AlertElementTest {
 		Assert.assertEquals("Alert Simples", response);
 		alert.accept();
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(response);
-		
-		driver.quit();
 	}
 	
 	@Test
@@ -51,8 +55,6 @@ public class AlertElementTest {
 		alert.accept();
 		Assert.assertEquals("Confirmado", alert.getText());
 		alert.accept();
-		
-		driver.quit();
 	}
 	
 	@Test
@@ -63,8 +65,6 @@ public class AlertElementTest {
 		alert.dismiss();
 		Assert.assertEquals("Negado", alert.getText());
 		alert.accept();
-		
-		driver.quit();
 	}
 	
 	@Test
@@ -83,8 +83,6 @@ public class AlertElementTest {
 		Assert.assertEquals(":D", alert.getText());
 		// ok | close alert
 		alert.accept();
-		
-		driver.quit();
 	}
 
 }

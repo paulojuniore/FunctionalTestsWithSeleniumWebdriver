@@ -2,6 +2,7 @@ package training_camp;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,12 +34,16 @@ public class TrainingCampTest {
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 	}
 	
+	@After
+	public void finalize() {
+		driver.quit();
+	}
+	
 	@Test
 	public void textFieldTest() {
 		driver.findElement(By.id("elementosForm:nome")).sendKeys("Writing test");
 		
 		Assert.assertEquals("Writing test", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
-		driver.quit();
 	}
 	
 	@Test
@@ -46,7 +51,6 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("This is a test for a textArea field.");
 		
 		Assert.assertEquals("This is a test for a textArea field.", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
-		driver.quit();
 	}
 	
 	@Test
@@ -54,7 +58,6 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:sexo:0")).click();
 		
 		Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
-		driver.quit();
 	}
 	
 	@Test
@@ -62,7 +65,6 @@ public class TrainingCampTest {
 		driver.findElement(By.id("elementosForm:comidaFavorita:2")).click();
 		
 		Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected());
-		driver.quit();
 	}
 	
 	@Test
@@ -74,7 +76,6 @@ public class TrainingCampTest {
 		combo.selectByVisibleText("Doutorado");
 		
 		Assert.assertEquals("Doutorado", combo.getFirstSelectedOption().getText());
-		driver.quit();
 	}
 	
 	@Test
@@ -97,7 +98,6 @@ public class TrainingCampTest {
 		
 		// checks if the "Especializacao" option is in combo options.
 		Assert.assertTrue(found);
-		driver.quit();
 	}
 	
 	@Test
@@ -114,7 +114,6 @@ public class TrainingCampTest {
 		combo.deselectByVisibleText("Natacao");
 		allSelectedOptions = combo.getAllSelectedOptions();
 		Assert.assertEquals(2, allSelectedOptions.size());
-		driver.quit();
 	}
 	
 	@Test
@@ -123,7 +122,6 @@ public class TrainingCampTest {
 		button.click();
 		
 		Assert.assertEquals("Obrigado!", button.getAttribute("value"));
-		driver.quit();
 	}
 	
 	@Test
