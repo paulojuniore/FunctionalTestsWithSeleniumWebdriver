@@ -1,5 +1,6 @@
 package dsl;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,6 +69,49 @@ public class DSL {
 	
 	public String getClassnameText(String class_name) {
 		return driver.findElement(By.className(class_name)).getText();
+	}
+	
+	/********* Alerts ************/
+	
+	public String getTextAlert(){
+		Alert alert = driver.switchTo().alert();
+		return alert.getText();
+	}
+	
+	public String getTextAndAcceptAlert(){
+		Alert alert = driver.switchTo().alert();
+		String value = alert.getText();
+		alert.accept();
+		return value;
+		
+	}
+	
+	public String getTextAndDismissAlert() {
+		Alert alert = driver.switchTo().alert();
+		String value = alert.getText();
+		alert.dismiss();
+		return value;
+		
+	}
+	
+	public void WriteAlert(String valor) {
+		Alert alert = driver.switchTo().alert();
+		alert.sendKeys(valor);
+		alert.accept();
+	}
+	
+	/********* Frames e Janelas ************/
+	
+	public void enterFrame(String id) {
+		driver.switchTo().frame(id);
+	}
+	
+	public void outFrame(){
+		driver.switchTo().defaultContent();
+	}
+	
+	public void switchWindow(String id) {
+		driver.switchTo().window(id);
 	}
 
 }
