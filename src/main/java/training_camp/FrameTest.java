@@ -9,6 +9,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import dsl.DSL;
+
 /**
  * 
  * @author paulojunior
@@ -24,9 +26,7 @@ public class FrameTest {
 	public void setUpWebdriver() {
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
 		driver = new ChromeDriver();
-		
 		driver.manage().window().setSize(new Dimension(1200, 768));
-		
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 	}
 	
