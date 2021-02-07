@@ -7,6 +7,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import dsl.DSL;
@@ -21,6 +22,7 @@ import dsl.DSL;
 public class FrameTest {
 	
 	private WebDriver driver;
+	private DSL dsl;
 	
 	@Before
 	public void setUpWebdriver() {
@@ -28,19 +30,28 @@ public class FrameTest {
 		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 768));
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL(driver);
 	}
 	
 	@Test
 	public void frameGetTextTest() {
-		driver.switchTo().frame("frame1");
-		driver.findElement(By.id("frameButton")).click();
-		Alert alert = driver.switchTo().alert();
-		String response = alert.getText();
+		dsl.enterFrame("frame1");
+		dsl.clickButton("frameButton");
+		String response = dsl.getTextAndAcceptAlert();
 		
 		Assert.assertEquals("Frame OK!", response);
-		alert.accept();
-		driver.switchTo().defaultContent();
+		dsl.outFrame();
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(response);
+	}
+	
+	@Test
+	public void interactWithFrameFromJavascriptCode() {
+		WebElement frame = driver.findElement(By.id("frame2"));
+		dsl.executeJS("window.scrollBy(0, arguments[0])", frame.getLocation().y);
+		dsl.enterFrame("frame2");
+		dsl.clickButton("frameButton");
+		String msg = dsl.getTextAndAcceptAlert();
+		Assert.assertEquals("Frame OK!", msg);
 	}
 
 }
