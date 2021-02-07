@@ -3,11 +3,11 @@ package page_objects_pattern;
 import org.openqa.selenium.WebDriver;
 import dsl.DSL;
 
-public class CampoTreinamentoPage {
+public class TrainingCampPage {
 	
 	private DSL dsl;
 	
-	public CampoTreinamentoPage(WebDriver driver) {
+	public TrainingCampPage(WebDriver driver) {
 		dsl = new DSL(driver);
 	}
 

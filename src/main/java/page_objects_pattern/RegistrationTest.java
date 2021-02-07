@@ -10,11 +10,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import dsl.DSL;
 
-public class TesteCadastro {
+/**
+ * 
+ * @author paulojunior
+ * 
+ * Simulates all possibilities of failure in registering the form.
+ *
+ */
+public class RegistrationTest {
 	
 	private WebDriver driver;
 	private DSL dsl;
-	private CampoTreinamentoPage page;
+	private TrainingCampPage page;
 
 	@Before
 	public void inicializa(){
@@ -22,7 +29,7 @@ public class TesteCadastro {
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		dsl = new DSL(driver);
-		page = new CampoTreinamentoPage(driver);
+		page = new TrainingCampPage(driver);
 	}
 	
 	@After
