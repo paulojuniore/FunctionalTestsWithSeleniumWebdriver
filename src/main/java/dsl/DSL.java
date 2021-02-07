@@ -2,6 +2,7 @@ package dsl;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -112,6 +113,13 @@ public class DSL {
 	
 	public void switchWindow(String id) {
 		driver.switchTo().window(id);
+	}
+	
+	/********* Interação com javascript *********/
+	
+	public void executeJS(String cmd, Object... params) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(cmd, params);
 	}
 
 }

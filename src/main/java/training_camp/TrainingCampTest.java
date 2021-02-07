@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,10 +38,10 @@ public class TrainingCampTest {
 		dsl = new DSL(driver);
 	}
 	
-	@After
-	public void finalize() {
-		driver.quit();
-	}
+//	@After
+//	public void finalize() {
+//		driver.quit();
+//	}
 	
 	@Test
 	public void textFieldTest() {
@@ -129,6 +130,17 @@ public class TrainingCampTest {
 		Assert.assertEquals("Campo de Treinamento", result);
 		result = dsl.getClassnameText("facilAchar");
 		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", result);
+	}
+	
+	@Test
+	public void usingJavascriptTest() {
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("alert('Testando javascript via selenium')");
+//		js.executeScript("document.getElementById('elementosForm:nome').value = 'Escrito via js'");
+//		js.executeScript("document.getElementById('elementosForm:sobrenome').type = 'radio'");
+
+		WebElement element = driver.findElement(By.id("elementosForm:nome"));
+		dsl.executeJS("arguments[0].style.border = arguments[1]", element, "solid 4px red");
 	}
 	
 }
