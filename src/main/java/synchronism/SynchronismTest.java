@@ -22,7 +22,7 @@ public class SynchronismTest {
 	private DSL dsl;
 
 	@Before
-	public void inicializa(){
+	public void setUp(){
 		System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
 		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 768));
@@ -31,7 +31,7 @@ public class SynchronismTest {
 	}
 	
 	@After
-	public void finaliza(){
+	public void finalize(){
 		driver.quit();
 	}
 	
@@ -43,6 +43,8 @@ public class SynchronismTest {
 		dsl.writeOnTextField("novoCampo", "Deu certo?");
 	}
 	
+	// Espera implícita. O teste é executado assim que a página é completamente carregada. Não sendo obrigatória
+	// a espera de todo o tempo de espera especificado.
 	@Test
 	public void implicitWaitTest() {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -51,6 +53,8 @@ public class SynchronismTest {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	}
 	
+	// Espera explícita. O teste é executado quando o elemento especificado é total renderizado dentro do intervalo
+	// de tempo especificado.
 	@Test
 	public void explicitWaitTest() {
 		dsl.clickButton("buttonDelay");
