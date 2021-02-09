@@ -1,14 +1,13 @@
 package page_objects_pattern;
 
-import org.openqa.selenium.WebDriver;
-import dsl.DSL;
+import core.DSL;
 
 public class TrainingCampPage {
 	
 	private DSL dsl;
 	
-	public TrainingCampPage(WebDriver driver) {
-		dsl = new DSL(driver);
+	public TrainingCampPage() {
+		dsl = new DSL();
 	}
 
 	public void setNome(String nome) {

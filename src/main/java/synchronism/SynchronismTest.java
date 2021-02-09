@@ -1,38 +1,29 @@
 package synchronism;
 
+import static core.DriverFactory.getDriver;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import dsl.DSL;
-import page_objects_pattern.TrainingCampPage;
+import core.DSL;
+import core.DriverFactory;
 
 public class SynchronismTest {
-	
-	private WebDriver driver;
 	
 	private DSL dsl;
 
 	@Before
 	public void setUp(){
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
-		driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 768));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 	
 	@After
 	public void finalize(){
-		driver.quit();
+		DriverFactory.killDriver();
 	}
 	
 	// Espera fixa. Onde o teste é executado somente após o tempo definido.
@@ -47,10 +38,10 @@ public class SynchronismTest {
 	// a espera de todo o tempo de espera especificado.
 	@Test
 	public void implicitWaitTest() {
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		dsl.clickButton("buttonDelay");
 		dsl.writeOnTextField("novoCampo", "Deu certo?");
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	}
 	
 	// Espera explícita. O teste é executado quando o elemento especificado é total renderizado dentro do intervalo
@@ -58,7 +49,7 @@ public class SynchronismTest {
 	@Test
 	public void explicitWaitTest() {
 		dsl.clickButton("buttonDelay");
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("novoCampo")));
 		dsl.writeOnTextField("novoCampo", "Deu certo?");
 	}

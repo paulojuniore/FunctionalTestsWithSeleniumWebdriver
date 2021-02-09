@@ -1,9 +1,9 @@
 package page_objects_pattern;
 
+import static core.DriverFactory.getDriver;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,11 +12,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import dsl.DSL;
+import core.DSL;
+import core.DriverFactory;
 
 /**
  * 
@@ -28,7 +25,6 @@ import dsl.DSL;
 @RunWith(value = Parameterized.class)
 public class RegistrationRulesTest {
 	
-	private WebDriver driver;
 	private DSL dsl;
 	private TrainingCampPage page;
 	
@@ -48,16 +44,14 @@ public class RegistrationRulesTest {
 
 	@Before
 	public void inicializa(){
-		driver = new FirefoxDriver();
-		driver.manage().window().setSize(new Dimension(1200, 765));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
-		page = new TrainingCampPage(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
+		page = new TrainingCampPage();
 	}
 	
 	@After
 	public void finaliza(){
-		driver.quit();
+		DriverFactory.killDriver();
 	}
 	
 	@Parameters

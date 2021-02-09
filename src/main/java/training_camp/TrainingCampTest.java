@@ -1,20 +1,16 @@
 package training_camp;
 
+import static core.DriverFactory.getDriver;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import dsl.DSL;
+import core.DSL;
+import core.DriverFactory;
 
 /**
  * 
@@ -27,21 +23,16 @@ public class TrainingCampTest {
 	
 	private DSL dsl;
 	
-	private WebDriver driver;
-	
 	@Before
 	public void setUpWebdriver() {
-		System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
-		driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1200, 768));
-		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 	
-//	@After
-//	public void finalize() {
-//		driver.quit();
-//	}
+	@After
+	public void finalize() {
+		DriverFactory.killDriver();
+	}
 	
 	@Test
 	public void textFieldTest() {
@@ -75,7 +66,7 @@ public class TrainingCampTest {
 	
 	@Test
 	public void checkValuesOfTheComboTest() {
-		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+		WebElement element = getDriver().findElement(By.id("elementosForm:escolaridade"));
 		Select combo = new Select(element);
 		List<WebElement> options = combo.getOptions();
 		
@@ -97,7 +88,7 @@ public class TrainingCampTest {
 	
 	@Test
 	public void multipleChoiceComboTest() {
-		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		WebElement element = getDriver().findElement(By.id("elementosForm:esportes"));
 		Select combo = new Select(element);
 		
 		dsl.selectSpinner("elementosForm:esportes", "Natacao");
@@ -139,7 +130,7 @@ public class TrainingCampTest {
 //		js.executeScript("document.getElementById('elementosForm:nome').value = 'Escrito via js'");
 //		js.executeScript("document.getElementById('elementosForm:sobrenome').type = 'radio'");
 
-		WebElement element = driver.findElement(By.id("elementosForm:nome"));
+		WebElement element = getDriver().findElement(By.id("elementosForm:nome"));
 		dsl.executeJS("arguments[0].style.border = arguments[1]", element, "solid 4px red");
 	}
 	
