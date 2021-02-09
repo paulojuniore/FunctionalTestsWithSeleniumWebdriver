@@ -1,15 +1,10 @@
 package page_objects_pattern;
 
+import core.BasePage;
 import core.DSL;
 
-public class TrainingCampPage {
+public class TrainingCampPage extends BasePage {
 	
-	private DSL dsl;
-	
-	public TrainingCampPage() {
-		dsl = new DSL();
-	}
-
 	public void setNome(String nome) {
 		dsl.writeOnTextField("elementosForm:nome", nome);
 	}

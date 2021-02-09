@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import core.BaseTest;
 import core.DSL;
 import core.DriverFactory;
 
@@ -14,7 +16,7 @@ import core.DriverFactory;
  * Simulates all possibilities of failure in registering the form.
  *
  */
-public class RegistrationTest {
+public class RegistrationTest extends BaseTest {
 
 	private DSL dsl;
 	private TrainingCampPage page;
@@ -24,11 +26,6 @@ public class RegistrationTest {
 		DriverFactory.getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		dsl = new DSL();
 		page = new TrainingCampPage();
-	}
-	
-	@After
-	public void finaliza(){
-		DriverFactory.killDriver();
 	}
 	
 	@Test

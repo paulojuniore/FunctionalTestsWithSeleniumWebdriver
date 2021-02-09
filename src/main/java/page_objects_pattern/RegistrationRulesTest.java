@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import core.BaseTest;
 import core.DSL;
 import core.DriverFactory;
 
@@ -23,7 +25,7 @@ import core.DriverFactory;
  *
  */
 @RunWith(value = Parameterized.class)
-public class RegistrationRulesTest {
+public class RegistrationRulesTest extends BaseTest {
 	
 	private DSL dsl;
 	private TrainingCampPage page;
@@ -47,11 +49,6 @@ public class RegistrationRulesTest {
 		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		dsl = new DSL();
 		page = new TrainingCampPage();
-	}
-	
-	@After
-	public void finaliza(){
-		DriverFactory.killDriver();
 	}
 	
 	@Parameters
