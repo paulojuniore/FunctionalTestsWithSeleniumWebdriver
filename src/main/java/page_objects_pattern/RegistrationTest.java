@@ -1,10 +1,8 @@
 package page_objects_pattern;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import core.BaseTest;
 import core.DSL;
 import core.DriverFactory;
